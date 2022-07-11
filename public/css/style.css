@@ -38,3 +38,11 @@ main {
   margin-left: 20px;
   background-color: white;
 }
+
+.add-margin {
+  margin: 30px;
+}
+
+.add-padding {
+  padding: 5px;
+}
