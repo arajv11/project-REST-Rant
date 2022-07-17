@@ -2,6 +2,7 @@ const React = require('react')
 const Def = require('../default')
 
 function show (data) {
+  // console.log("data= "+data)
     return (
         <Def>
           <main className="row bg-warning add-margin">
@@ -13,8 +14,8 @@ function show (data) {
               <h3>currently unrated</h3>
               <br/>
               <h2 className="text-info bg-secondary add-padding">Description</h2>
-              <h3>Located in { data.place.city }, { data.place.state }</h3>
-              <h3>Cuisines: { data.place.cuisines }</h3>
+              <h3>{data.place.showEstablished()}</h3>
+              <h4>Cuisines: { data.place.cuisines }</h4>
             </div>
             <div className="col-6">
               <img src={ data.place.pic } alt={ data.place.name } className="col-6"/>
