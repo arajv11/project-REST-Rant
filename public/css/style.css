@@ -30,6 +30,8 @@ nav a:hover {
 
 body {
   background-color: lightblue;
+  /* Photo by "https://unsplash.com/@covertnine?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
+  Tim Toomey on "https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" Unsplash */
   background-image: url("/images/food-background.jpg");
   background-size: 25%;
   text-align: center;
