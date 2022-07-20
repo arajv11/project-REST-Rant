@@ -30,7 +30,10 @@ nav a:hover {
 
 body {
   background-color: lightblue;
+  background-image: url("/images/food-background.jpg");
+  background-size: 25%;
   text-align: center;
+  opacity: 0.9;
 }
 
 main {
