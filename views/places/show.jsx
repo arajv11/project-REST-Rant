@@ -7,7 +7,25 @@ function show (data) {
         No comments yet!
       </h3>
     )
+    let rating = (
+      <h3 className="inactive">
+        Not yet rated
+      </h3>
+    )
     if (data.place.comments.length) {
+      let sumRatings = data.place.comments.reduce((tot, c) => {
+        return tot + c.stars
+      }, 0)
+      let averageRating = Math.round(sumRatings / data.place.comments.length)
+      let stars = ''
+      for (let i = 0; i < averageRating; i++) {
+        stars += 'â­ï¸'
+      }
+      rating = (
+        <h3>
+          {stars} stars
+        </h3>
+      )
       comments = data.place.comments.map(c => {
         return (
           <div className="border">
@@ -27,7 +45,7 @@ function show (data) {
             <h1 className="text-info bg-danger add-padding">{ data.place.name }</h1>
             <div className="row col-6">
               <h2 className="text-info bg-secondary add-padding">Rating</h2>
-              <h3>currently unrated</h3>
+              <h3>{rating}</h3>
               <br/>
               <h2 className="text-info bg-secondary add-padding">Description</h2>
               <h3>{data.place.showEstablished()}</h3>
@@ -61,7 +79,7 @@ function show (data) {
               </div>
               <div className="form-group col-2">
                 <label htmlFor="stars">Star Rating</label>
-                <input id="stars" name="stars" type="range"  min="0" max="5" step="0.5"/>
+                <input id="stars" name="stars" type="range" min="0" max="5" step="0.5"/>
               </div>
               <div className="form-group col-2">
                 <label htmlFor="rant">Rant</label>

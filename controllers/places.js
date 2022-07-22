@@ -16,19 +16,19 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   db.Place.create(req.body)
   .then(() => {
-      res.redirect('/places')
+    res.redirect('/places')
   })
   .catch(err => {
     if (err && err.name == 'ValidationError') {
       let message = 'Validation Error: '
       for (var field in err.errors) {
-          message += `${field} was ${err.errors[field].value}. `
-          message += `${err.errors[field].message}`
+        message += `${field} was ${err.errors[field].value}. `
+        message += `${err.errors[field].message}`
       }
       console.log('Validation error message', message)
       res.render('places/new', { message })
     } else {
-        res.render('error404')
+      res.render('error404')
     }
   })
 })
@@ -51,34 +51,35 @@ router.get('/:id', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
-  res.send('PUT /places/:id stub')
+  db.Place.findByIdAndUpdate(req.params.id, req.body)
+  .then(() => {
+      res.redirect(`/places/${req.params.id}`)
+  })
+  .catch(err => {
+      console.log('err', err)
+      res.render('error404')
+  })
 })
 
-router.delete('/places/:id', (req, res) => {
-  let id = Number(req.params.id)
-  if (isNaN(id)) {
-      res.render('error404')
-  }
-  else if (!places[id]) {
-      res.render('error404')
-  }
-  else {
-      places.splice(id, 1)
+router.delete('/:id', (req, res) => {
+  db.Place.findByIdAndDelete(req.params.id)
+  .then(place => {
       res.redirect('/places')
-  }
+  })
+  .catch(err => {
+      console.log('err', err)
+      res.render('error404')
+  })
 })
 
 router.get('/:id/edit', (req, res) => {
-  let id = Number(req.params.id)
-  if (isNaN(id)) {
+  db.Place.findById(req.params.id)
+  .then(place => {
+      res.render('places/edit', { place })
+  })
+  .catch(err => {
       res.render('error404')
-  }
-  else if (!places[id]) {
-      res.render('error404')
-  }
-  else {
-      res.render('places/edit', { place: places[id] })
-  }
+  })
 })
 
 router.post('/:id/comment', (req, res) => {
@@ -88,20 +89,20 @@ router.post('/:id/comment', (req, res) => {
   console.log("Place from database" + db.Place.findById(req.params.id))
   db.Place.findById(req.params.id)
   .then(place => {
-      db.Comment.create(req.body)
+    db.Comment.create(req.body)
       .then(comment => {
-          place.comments.push(comment.id)
-          place.save()
+        place.comments.push(comment.id)
+        place.save()
           .then(() => {
-              res.redirect(`/places/${req.params.id}`)
+            res.redirect(`/places/${req.params.id}`)
           })
       })
       .catch(err => {
-          res.render('error404')
+        res.render('error404')
       })
   })
   .catch(err => {
-      res.render('error404')
+    res.render('error404')
   })
 })
 
