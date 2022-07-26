@@ -33,7 +33,7 @@ body {
   /* Photo by "https://unsplash.com/@covertnine?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText"
   Tim Toomey on "https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText" Unsplash */
   background-image: url("/images/food-background.jpg");
-  background-size: 25%;
+  background-size: 100%;
   text-align: center;
   opacity: 0.9;
 }

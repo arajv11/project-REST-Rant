@@ -41,8 +41,8 @@ function show (data) {
     }
     return (
         <Def>
-          <main className="row bg-warning add-margin">
-            <h1 className="text-info bg-danger add-padding">{ data.place.name }</h1>
+          <main className="row bg-light add-margin">
+            <h1 className="text-dark bg-warning add-padding">{ data.place.name }</h1>
             <div className="row col-6">
               <h2 className="text-info bg-secondary add-padding">Rating</h2>
               <h3>{rating}</h3>
@@ -54,10 +54,12 @@ function show (data) {
             <div className="col-6">
               <img src={ data.place.pic } alt={ data.place.name } className="col-6"/>
             </div>
-            <a href={`/places/${data.place.id}/edit`} className="btn btn-warning"> 
-              Edit
-            </a>     
-            <form method="POST" action={`/places/${data.place.id}?_method=DELETE`}> 
+            <form method="PUT" action={`/places/${data.place.id}/edit`} className="col-6"> 
+              <button type="submit" className="btn btn-success">
+                Edit
+              </button>
+            </form>     
+            <form method="POST" action={`/places/${data.place.id}?_method=DELETE`} className="col-6"> 
               <button type="submit" className="btn btn-danger">
                 Delete
               </button>
